@@ -11,6 +11,8 @@
                 <app-another-result></app-another-result>
                 <hr>
                 <app-another-counter></app-another-counter>
+                <hr>
+                <input type="text" :value="value">
             </div>
         </div>
     </div>
@@ -24,6 +26,11 @@
 
 
     export default {
+        computed: {
+            value() {
+                return this.$store.getters.value;
+            }
+        },
         components: {
             appCounter: Counter,
             appResult: Result,

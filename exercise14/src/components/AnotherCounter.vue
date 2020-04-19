@@ -10,8 +10,8 @@
     export default {
         methods: { 
             ...mapActions([
-                'increment',
-                'decrement',
+                'asyncIncrement',
+                'asyncDecrement',
             ])
             // ,
             // increment(by) {
