@@ -12,7 +12,10 @@
                 <hr>
                 <app-another-counter></app-another-counter>
                 <hr>
-                <input type="text" :value="value">
+                <!-- <input type="text" :value="value" @input="updateValue"> -->
+                <input type="text" v-model="value">
+
+                <p>{{ value }}</p>
             </div>
         </div>
     </div>
@@ -23,12 +26,25 @@
     import Result from './components/Result.vue';
     import AnotherResult from './components/AnotherResult.vue';
     import AnotherCounter from './components/AnotherCounter.vue';
-
+    import * as types from './store/types';
 
     export default {
         computed: {
-            value() {
-                return this.$store.getters.value;
+            // value() {
+            //     return this.$store.getters.value;
+            // }
+            value: {
+                get() {
+                    return this.$store.getters[types.VALUE];
+                },
+                set(value) { // 2 way data binding - use with caution
+                    this.$store.dispatch(types.ACTION_UPDATE_VALUE, value);
+                }
+            }
+        },
+        methods: {
+            updateValue(event) {
+                this.$store.dispatch(types.ACTION_UPDATE_VALUE, event.target.value);
             }
         },
         components: {
